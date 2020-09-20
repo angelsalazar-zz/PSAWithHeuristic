@@ -1,30 +1,30 @@
 from board import buildGrid
-from board import toggleCell
-from board import buildGrid
-from board import parseBoard
+from board import toBoard
+from boardConfigurations import EASY_BOARD
+from boardConfigurations import MEDIUM_BOARD
+from boardConfigurations import HARD_BOARD
 from cleanUpPuzzle import CleanUpPuzzle
-from search import breadth_first_search
-from search import uniform_cost_search
 from display import displayProblemSolution
-import time
+from search import astar_search
+from heuristics import nonAdmissibleHeuristic
+from timer import Timer
 
-BOARD_SIZE = 6
+BOARD_SIZE = 11
 
-HARD_BOARD = [
-    '0|1|0|0|0|1',
-    '0|0|1|0|0|0',
-    '0|0|0|1|0|1',
-    '0|1|0|0|1|0',
-    '0|0|1|0|0|0',
-    '0|0|0|0|0|0'
-]
-
-start_time = time.time()
-easy_goal = breadth_first_search(
-    CleanUpPuzzle(
-        '\n'.join(HARD_BOARD), 
-        buildGrid(size = BOARD_SIZE)
+def run(puzzle = None, difficulty = None):
+    watch = Timer()
+    solution = astar_search(
+        puzzle,
+        nonAdmissibleHeuristic
     )
-)
+    watch.stop()
+    displayProblemSolution(solution, 'astar_search (Difficulty ' + difficulty + ')', watch.getTotalTime())
 
-displayProblemSolution(easy_goal, 'breadth_first_search', time.time() - start_time)
+
+# Non Admissible Heuristic
+GOAL_STATE = buildGrid(BOARD_SIZE)
+
+run(CleanUpPuzzle(toBoard(EASY_BOARD), GOAL_STATE), 'EASY')
+run(CleanUpPuzzle(toBoard(MEDIUM_BOARD), GOAL_STATE), 'MEDIUM')
+run(CleanUpPuzzle(toBoard(HARD_BOARD), GOAL_STATE), 'HARD')
+

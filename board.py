@@ -1,5 +1,8 @@
 import random
 
+def toBoard(rows):
+    return '\n'.join(rows)
+
 # getAffectedCellsByPosition
 # retrieves all affected cells based on the given position
 # @param {Tuple} position
