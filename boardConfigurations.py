@@ -1,3 +1,4 @@
+# grid generator https://jsbin.com/hibuyuzemo/edit?html,js,console,output
 EASY_BOARD = [
     '0|0|0|0|0|0|0|0|0|0|0',
     '0|0|0|0|0|0|0|0|0|0|0',
