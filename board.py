@@ -1,5 +1,3 @@
-import random
-
 def toBoard(rows):
     return '\n'.join(rows)
 

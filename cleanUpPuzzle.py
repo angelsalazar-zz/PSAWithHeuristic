@@ -23,7 +23,7 @@ class CleanUpPuzzle(Problem):
         return toggleCell(state, action[1])
 
 # getPossibleMovements scans the full board
-# which is not optimal (a more efficient algorithm is needed)
+# 
 def getPossibleMovements(state):
     board = parseBoard(state)
     size = len(board)
